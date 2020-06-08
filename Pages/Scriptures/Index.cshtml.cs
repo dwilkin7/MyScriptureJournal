@@ -31,6 +31,9 @@ namespace MyScriptureJournal.Pages.Scriptures
         public string ScriptureBook { get; set; }
         public SelectList Books { get; private set; }
 
+        [BindProperty(SupportsGet = true)]
+        public string SortBy { get; set; }
+
         //Search by Book name
         public async Task OnGetAsync()
         {
@@ -50,6 +53,19 @@ namespace MyScriptureJournal.Pages.Scriptures
             {
                 scriptures = scriptures.Where(x => x.Book == ScriptureBook);
             }
+
+            if (!string.IsNullOrEmpty(SortBy))
+            {
+                if (SortBy == "Book")
+                {
+                    scriptures = scriptures.OrderBy(o => o.Book);
+                }
+                else if (SortBy == "DateCreated")
+                {
+                    scriptures = scriptures.OrderBy(o => o.CreatedDate);
+                }
+            }
+
             Books = new SelectList(await bookQuery.Distinct().ToListAsync());
             Scripture = await scriptures.ToListAsync();
         }

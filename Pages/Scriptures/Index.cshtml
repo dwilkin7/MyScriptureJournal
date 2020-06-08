@@ -24,7 +24,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Scripture[0].Book)
+                <a asp-route-sortBy="Book">@Html.DisplayNameFor(model => model.Scripture[0].Book)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Scripture[0].Chapter)
@@ -33,7 +33,7 @@
                 @Html.DisplayNameFor(model => model.Scripture[0].Verse)
             </th>
             <th>
-                Date Created
+                <a asp-route-sortBy="DateCreated">Date Created</a>
                 
             </th>
             <th>
